@@ -15,4 +15,6 @@ func Exec() {
 	postman.Init()
 
 	// Begin testing
+	s := GetServer(postman)
+	_ = s.Run(":5000")
 }
