@@ -2,7 +2,7 @@ package mail
 
 import "github.com/mailgun/mailgun-go"
 
-func SendSimpleMessage(domain, apiKey string) (string, error) {
+func SendSimpleMessage(domain string, apiKey string) (string, error) {
 	mg := mailgun.NewMailgun(domain, apiKey)
 	m := mg.NewMessage(
 		"Excited User <elliot@tutorialedge.net>",
