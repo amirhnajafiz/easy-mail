@@ -24,6 +24,18 @@ func (h Handler) SendMail(c *gin.Context) {
 		To:      c.Param("to"),
 	}
 
+	if key, ok := c.Get("validation"); ok {
+		if key == "no" {
+			validation = false
+		}
+	}
+
+	if key, ok := c.Get("is_html"); ok {
+		if key == "yes" {
+			isHTML = true
+		}
+	}
+
 	id, err := h.Postman.Send(env, validation, isHTML)
 	if err != nil {
 		_ = c.Error(err)
