@@ -11,12 +11,12 @@ func (m *Mail) Init() {
 	m.Client = mailgun.NewMailgun(m.Cfg.Domain, m.Cfg.APIKEY)
 }
 
-func (m *Mail) SendSimpleMessage() (string, error) {
+func (m *Mail) SendSimpleMessage(p Packet) (string, error) {
 	ms := m.Client.NewMessage(
-		"Excited User <elliot@tutorialedge.net>",
-		"Hello",
-		"Testing some Mailgun!",
-		"elliot@tutorialedge.net",
+		p.FFrom,
+		p.SSubject,
+		p.TText,
+		p.TTo,
 	)
 	_, id, err := m.Client.Send(ms)
 
