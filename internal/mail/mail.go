@@ -13,7 +13,7 @@ func (m *Mail) Init() {
 	m.Client = mailgun.NewMailgun(m.Cfg.Domain, m.Cfg.APIKEY)
 }
 
-func (m *Mail) Send(e Envelope, validation bool) (string, error) {
+func (m *Mail) Send(e Envelope, validation bool, isHTML bool) (string, error) {
 	if validation {
 		if err := m.validate(e.From, e.To); err != nil {
 			return "", err
@@ -26,6 +26,11 @@ func (m *Mail) Send(e Envelope, validation bool) (string, error) {
 		e.Text,
 		e.To,
 	)
+
+	if isHTML {
+		ms.SetHtml(e.Text)
+	}
+
 	_, id, err := m.Client.Send(ms)
 
 	return id, err
