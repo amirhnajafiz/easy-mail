@@ -13,26 +13,36 @@ func (m *Mail) Init() {
 	m.Client = mailgun.NewMailgun(m.Cfg.Domain, m.Cfg.APIKEY)
 }
 
-func (m *Mail) Send(e Envelope) (string, error) {
-	v := mailgun.NewEmailValidator(m.Cfg.APIKEY)
-
-	senderEmail, err := v.ValidateEmail(e.From, false)
-	if err != nil {
-		return "", err
-	}
-
-	getterEmail, err := v.ValidateEmail(e.To, false)
-	if err != nil {
-		return "", err
+func (m *Mail) Send(e Envelope, validation bool) (string, error) {
+	if validation {
+		if err := m.validate(e.From, e.To); err != nil {
+			return "", err
+		}
 	}
 
 	ms := m.Client.NewMessage(
-		senderEmail.Address,
+		e.From,
 		e.Subject,
 		e.Text,
-		getterEmail.Address,
+		e.To,
 	)
 	_, id, err := m.Client.Send(ms)
 
 	return id, err
+}
+
+func (m *Mail) validate(sender string, receiver string) error {
+	v := mailgun.NewEmailValidator(m.Cfg.APIKEY)
+
+	_, err := v.ValidateEmail(sender, false)
+	if err != nil {
+		return err
+	}
+
+	_, err = v.ValidateEmail(receiver, false)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
