@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/amirhnajafiz/easy-mail/internal/logger"
 	"log"
 
 	"github.com/amirhnajafiz/easy-mail/internal/cmd/server"
@@ -14,6 +15,7 @@ import (
 type Config struct {
 	Server  server.Config `koanf:"server"`
 	MailGun mail.Config   `koanf:"mail_gun"`
+	Logger  logger.Config `koanf:"logger"`
 }
 
 func Load() Config {
