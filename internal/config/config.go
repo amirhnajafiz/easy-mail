@@ -1,13 +1,14 @@
 package config
 
 import (
+	"log"
+
 	"github.com/amirhnajafiz/easy-mail/internal/cmd/server"
 	"github.com/amirhnajafiz/easy-mail/internal/mail"
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/parsers/yaml"
 	"github.com/knadh/koanf/providers/file"
 	"github.com/knadh/koanf/providers/structs"
-	"log"
 )
 
 type Config struct {
