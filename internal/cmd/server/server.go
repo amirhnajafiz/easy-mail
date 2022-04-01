@@ -19,7 +19,7 @@ func GetServer(cfg config.Config) *gin.Engine {
 		Postman: postman,
 	}
 
-	router.POST("/send/main", h.SendMail)
+	router.POST(cfg.Server.Route, h.SendMail)
 
 	return router
 }
