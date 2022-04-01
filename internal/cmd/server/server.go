@@ -1,4 +1,4 @@
-package cmd
+package server
 
 import (
 	"github.com/amirhnajafiz/easy-mail/internal/config"
