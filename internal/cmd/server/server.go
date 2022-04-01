@@ -13,13 +13,14 @@ func GetServer(cfg config.Config) *gin.Engine {
 	log := logger.New(cfg.Logger)
 
 	postman := mail.Mail{
-		Cfg: cfg.MailGun,
+		Cfg:    cfg.MailGun,
+		Logger: log.Named("mail"),
 	}
 	postman.Init()
 
 	h := handler.Handler{
 		Postman: postman,
-		Logger:  log,
+		Logger:  log.Named("handler"),
 	}
 
 	router.POST(cfg.Server.Route, h.SendMail)
