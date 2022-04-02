@@ -13,30 +13,47 @@ type Handler struct {
 	Logger  *zap.Logger
 }
 
+type request struct {
+	From    string `json:"from"`
+	Subject string `json:"subject"`
+	Text    string `json:"text"`
+	To      string `json:"to"`
+
+	Validation string `json:"validation"`
+	IsHTML     string `json:"is_html"`
+}
+
 func (h Handler) SendMail(c *gin.Context) {
-	validation := true
-	isHTML := false
-	from, _ := c.Get("from")
-	subject, _ := c.Get("subject")
-	text, _ := c.Get("text")
-	to, _ := c.Get("to")
+	var (
+		req        request
+		validation bool
+		isHTML     bool
+	)
+
+	if err := c.BindJSON(&req); err != nil {
+		_ = c.Error(err)
+	}
 
 	env := mail.Envelope{
-		From:    from.(string),
-		Subject: subject.(string),
-		Text:    text.(string),
-		To:      to.(string),
+		From:    req.From,
+		Subject: req.Subject,
+		Text:    req.Text,
+		To:      req.To,
 	}
 
 	if key, ok := c.Get("validation"); ok {
 		if key == "no" {
 			validation = false
+		} else {
+			validation = true
 		}
 	}
 
 	if key, ok := c.Get("is_html"); ok {
 		if key == "yes" {
 			isHTML = true
+		} else {
+			isHTML = false
 		}
 	}
 
