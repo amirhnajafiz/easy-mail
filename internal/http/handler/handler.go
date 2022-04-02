@@ -14,16 +14,18 @@ type Handler struct {
 }
 
 func (h Handler) SendMail(c *gin.Context) {
-	var (
-		validation = true
-		isHTML     = false
-	)
+	validation := true
+	isHTML := false
+	from, _ := c.Get("from")
+	subject, _ := c.Get("subject")
+	text, _ := c.Get("text")
+	to, _ := c.Get("to")
 
 	env := mail.Envelope{
-		From:    c.Param("from"),
-		Subject: c.Param("subject"),
-		Text:    c.Param("text"),
-		To:      c.Param("to"),
+		From:    from.(string),
+		Subject: subject.(string),
+		Text:    text.(string),
+		To:      to.(string),
 	}
 
 	if key, ok := c.Get("validation"); ok {
