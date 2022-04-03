@@ -26,8 +26,8 @@ type request struct {
 func (h Handler) SendMail(c *gin.Context) {
 	var (
 		req        request
-		validation bool
-		isHTML     bool
+		validation = true
+		isHTML     = false
 	)
 
 	if err := c.BindJSON(&req); err != nil {
@@ -44,16 +44,12 @@ func (h Handler) SendMail(c *gin.Context) {
 	if key, ok := c.Get("validation"); ok {
 		if key == "no" {
 			validation = false
-		} else {
-			validation = true
 		}
 	}
 
 	if key, ok := c.Get("is_html"); ok {
 		if key == "yes" {
 			isHTML = true
-		} else {
-			isHTML = false
 		}
 	}
 
