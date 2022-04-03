@@ -23,7 +23,7 @@ func GetServer(cfg config.Config) *gin.Engine {
 		Logger:  log.Named("handler"),
 	}
 
-	router.POST(cfg.Server.Route, h.SendMail)
+	router.POST("/mail/send", h.SendMail)
 
 	return router
 }

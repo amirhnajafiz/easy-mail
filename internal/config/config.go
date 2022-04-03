@@ -1,10 +1,9 @@
 package config
 
 import (
-	"github.com/amirhnajafiz/easy-mail/internal/logger"
 	"log"
 
-	"github.com/amirhnajafiz/easy-mail/internal/cmd/server"
+	"github.com/amirhnajafiz/easy-mail/internal/logger"
 	"github.com/amirhnajafiz/easy-mail/internal/mail"
 	"github.com/knadh/koanf"
 	"github.com/knadh/koanf/parsers/yaml"
@@ -13,7 +12,7 @@ import (
 )
 
 type Config struct {
-	Server  server.Config `koanf:"server"`
+	Server  string        `koanf:"server"`
 	MailGun mail.Config   `koanf:"mail_gun"`
 	Logger  logger.Config `koanf:"logger"`
 }

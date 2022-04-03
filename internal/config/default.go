@@ -1,17 +1,13 @@
 package config
 
 import (
-	"github.com/amirhnajafiz/easy-mail/internal/cmd/server"
 	"github.com/amirhnajafiz/easy-mail/internal/logger"
 	"github.com/amirhnajafiz/easy-mail/internal/mail"
 )
 
 func Default() Config {
 	return Config{
-		Server: server.Config{
-			Address: ":5000",
-			Route:   "/send/mail",
-		},
+		Server: ":5000",
 		MailGun: mail.Config{
 			Domain: "",
 			APIKEY: "",

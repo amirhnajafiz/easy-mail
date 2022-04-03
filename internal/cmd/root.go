@@ -10,5 +10,5 @@ func Exec() {
 
 	// Begin testing
 	s := server.GetServer(cfg)
-	_ = s.Run(cfg.Server.Address)
+	_ = s.Run(cfg.Server)
 }
