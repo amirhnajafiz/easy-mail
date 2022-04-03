@@ -1,0 +1,6 @@
+server: ":5000"
+mail_gun:
+  domain: ""
+  api_key: ""
+logger:
+  level: "debug"
