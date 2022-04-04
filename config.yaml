@@ -1,6 +1,0 @@
-server: ":5000"
-mail_gun:
-  domain: "sandboxa4e21e2439ba4a9cafee0587e3134637.mailgun.org"
-  api_key: "3bbd406a636a32fb943afa0b8da2184c-38029a9d-49239cf0"
-logger:
-  level: "debug"

@@ -1,17 +1,65 @@
-# easy-mail
+# Easy Mail
 
-Easy mail is a service for sending emails in your Golang application.
+Easy mail is a service for sending emails in 
+your Golang application via Mailgun.
 
 ## How to use?
+#### Email sending request
+| Syntax | Description     |
+|--------|-----------------|
+| URL    | :5000/mail/send |
+| Method | POST            |
+
+#### Body
+```json
+{
+  "from": "email | [required]",
+  "to": "email | [required]",
+  "subject": "string | [required]",
+  "text": "string | [required]",
+  "validation": "yes/no [optional]",
+  "is_html": "yes/no [optional]"
+}
+```
+
+#### Valid response
+```json
+{
+  "id": "email id"
+}
+```
+
+#### Invalid response
+```json
+{
+  "error": "[error]"
+}
+```
+
+## Configs
+First copy the example file:
+```shell
+cp ./config/config-example.yml ./config.yaml
+```
+
+Now set the configs, like mailgun Domain and API key.
 
 ## Deploy
+To deploy the project on kubernetes, use the following commands:
+```shell
+kubctl apply -f 
+kubctl apply -f 
+```
 
-## Testing
-
+If everything goes right, you can to get a response like this:
 ```shell
 [GIN-debug] Listening and serving HTTP on :5000
 [GIN] 2022/04/04 - 14:02:27 | 200 |  2.291217333s |       127.0.0.1 | POST     "/mail/send"
 ```
+
+## Testing
+You can use k6 to test the service. A successful response of
+k6 testing should be like this:
 
 ```shell
 default ✓ [======================================] 1 VUs  00m03.3s/10m0s  1/1 iters, 1 per VU
