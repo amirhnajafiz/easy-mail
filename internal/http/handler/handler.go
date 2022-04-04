@@ -26,7 +26,7 @@ type request struct {
 func (h Handler) SendMail(c *gin.Context) {
 	var (
 		req        request
-		validation = true
+		validation = false
 		isHTML     = false
 	)
 
@@ -42,8 +42,8 @@ func (h Handler) SendMail(c *gin.Context) {
 	}
 
 	if key, ok := c.Get("validation"); ok {
-		if key == "no" {
-			validation = false
+		if key == "yes" {
+			validation = true
 		}
 	}
 
