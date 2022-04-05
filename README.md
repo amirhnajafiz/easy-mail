@@ -47,8 +47,8 @@ Now set the configs, like mailgun Domain and API key.
 ## Deploy
 To deploy the project on kubernetes, use the following commands:
 ```shell
-kubctl apply -f 
-kubctl apply -f 
+kubctl apply -f ./deploy/deployments.yaml
+kubctl apply -f ./deploy/service.yaml
 ```
 
 If everything goes right, you can to get a response like this:

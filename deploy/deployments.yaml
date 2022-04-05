@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: easy-mail
+  labels:
+    app: easy-mail
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: easy-mail
+  template:
+    metadata:
+      labels:
+        app: easy-mail
+    spec:
+      containers:
+        - name: easy-mail
+          image: ""  # docker image
+          ports:
+            - containerPort: 5000
