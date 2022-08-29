@@ -8,7 +8,7 @@ import (
 )
 
 type Handler struct {
-	Postman mail.Mail
+	Mailer mail.Mail
 }
 
 type request struct {
@@ -51,7 +51,7 @@ func (h Handler) SendMail(c *gin.Context) {
 		}
 	}
 
-	id, err := h.Postman.Send(env, validation, isHTML)
+	id, err := h.Mailer.Send(env, validation, isHTML)
 	if err != nil {
 		_ = c.Error(err)
 	}

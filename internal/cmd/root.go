@@ -12,13 +12,10 @@ func Execute() {
 
 	router := gin.Default()
 
-	postman := mail.Mail{
-		Cfg: cfg.MailGun,
-	}
-	postman.Init()
+	m := mail.New(cfg.MailGun)
 
 	h := handler.Handler{
-		Postman: postman,
+		Mailer: m,
 	}
 
 	router.POST("/mail/send", h.SendMail)

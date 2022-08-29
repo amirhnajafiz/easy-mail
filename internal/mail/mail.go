@@ -5,7 +5,7 @@ import (
 )
 
 type Mail struct {
-	Cfg    Config
+	APIKEY string
 	Client *mailgun.MailgunImpl
 }
 
@@ -16,8 +16,11 @@ type Envelope struct {
 	To      string
 }
 
-func (m *Mail) Init() {
-	m.Client = mailgun.NewMailgun(m.Cfg.Domain, m.Cfg.APIKEY)
+func New(cfg Config) Mail {
+	return Mail{
+		APIKEY: cfg.APIKEY,
+		Client: mailgun.NewMailgun(cfg.Domain, cfg.APIKEY),
+	}
 }
 
 func (m *Mail) Send(e Envelope, validation bool, isHTML bool) (string, error) {
@@ -44,7 +47,7 @@ func (m *Mail) Send(e Envelope, validation bool, isHTML bool) (string, error) {
 }
 
 func (m *Mail) validate(sender string, receiver string) error {
-	v := mailgun.NewEmailValidator(m.Cfg.APIKEY)
+	v := mailgun.NewEmailValidator(m.APIKEY)
 
 	_, err := v.ValidateEmail(sender, false)
 	if err != nil {
