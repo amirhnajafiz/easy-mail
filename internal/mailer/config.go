@@ -1,4 +1,4 @@
-package mail
+package mailer
 
 type Config struct {
 	Domain string `koanf:"domain"`

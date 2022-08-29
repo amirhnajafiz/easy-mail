@@ -1,10 +1,10 @@
-package mail
+package mailer
 
 import (
 	"github.com/mailgun/mailgun-go"
 )
 
-type Mail struct {
+type Mailer struct {
 	APIKEY string
 	Client *mailgun.MailgunImpl
 }
@@ -16,14 +16,14 @@ type Envelope struct {
 	To      string
 }
 
-func New(cfg Config) Mail {
-	return Mail{
+func New(cfg Config) Mailer {
+	return Mailer{
 		APIKEY: cfg.APIKEY,
 		Client: mailgun.NewMailgun(cfg.Domain, cfg.APIKEY),
 	}
 }
 
-func (m *Mail) Send(e Envelope, validation bool, isHTML bool) (string, error) {
+func (m *Mailer) Send(e Envelope, validation bool, isHTML bool) (string, error) {
 	if validation {
 		if err := m.validate(e.From, e.To); err != nil {
 			return "", err
@@ -46,7 +46,7 @@ func (m *Mail) Send(e Envelope, validation bool, isHTML bool) (string, error) {
 	return id, err
 }
 
-func (m *Mail) validate(sender string, receiver string) error {
+func (m *Mailer) validate(sender string, receiver string) error {
 	v := mailgun.NewEmailValidator(m.APIKEY)
 
 	_, err := v.ValidateEmail(sender, false)

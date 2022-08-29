@@ -3,12 +3,12 @@ package handler
 import (
 	"net/http"
 
-	"github.com/amirhnajafiz/easy-mail/internal/mail"
+	"github.com/amirhnajafiz/easy-mail/internal/mailer"
 	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
-	Mailer mail.Mail
+	Mailer mailer.Mailer
 }
 
 type request struct {
@@ -32,7 +32,7 @@ func (h Handler) SendMail(c *gin.Context) {
 		_ = c.Error(err)
 	}
 
-	env := mail.Envelope{
+	env := mailer.Envelope{
 		From:    req.From,
 		Subject: req.Subject,
 		Text:    req.Text,
