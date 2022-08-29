@@ -9,6 +9,13 @@ type Mail struct {
 	Client *mailgun.MailgunImpl
 }
 
+type Envelope struct {
+	From    string
+	Subject string
+	Text    string
+	To      string
+}
+
 func (m *Mail) Init() {
 	m.Client = mailgun.NewMailgun(m.Cfg.Domain, m.Cfg.APIKEY)
 }
