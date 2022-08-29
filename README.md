@@ -62,6 +62,10 @@ You can use k6 to test the service. A successful response of
 k6 testing should be like this:
 
 ```shell
+k6 run ./k6/script.js
+```
+
+```shell
 default ✓ [======================================] 1 VUs  00m03.3s/10m0s  1/1 iters, 1 per VU
 
      data_received..................: 202 B 61 B/s
