@@ -62,7 +62,7 @@ You can use k6 to test the service. A successful response of
 k6 testing should be like this:
 
 ```shell
-k6 run ./k6/script.js
+k6 run ./api/k6/script.js
 ```
 
 ```shell

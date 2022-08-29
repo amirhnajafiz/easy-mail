@@ -1,7 +1,6 @@
 package config
 
 import (
-	"github.com/amirhnajafiz/easy-mail/internal/logger"
 	"github.com/amirhnajafiz/easy-mail/internal/mail"
 )
 
@@ -11,9 +10,6 @@ func Default() Config {
 		MailGun: mail.Config{
 			Domain: "",
 			APIKEY: "",
-		},
-		Logger: logger.Config{
-			Level: "debug",
 		},
 	}
 }

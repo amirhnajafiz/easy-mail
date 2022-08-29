@@ -5,12 +5,10 @@ import (
 
 	"github.com/amirhnajafiz/easy-mail/internal/mail"
 	"github.com/gin-gonic/gin"
-	"go.uber.org/zap"
 )
 
 type Handler struct {
 	Postman mail.Mail
-	Logger  *zap.Logger
 }
 
 type request struct {
@@ -55,8 +53,6 @@ func (h Handler) SendMail(c *gin.Context) {
 
 	id, err := h.Postman.Send(env, validation, isHTML)
 	if err != nil {
-		h.Logger.Fatal("failed to send message", zap.Error(err))
-
 		_ = c.Error(err)
 	}
 
