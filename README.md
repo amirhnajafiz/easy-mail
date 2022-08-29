@@ -1,9 +1,28 @@
-# Easy Mail
+<p align="center">
+    <img src="assets/logo.png" width="200" alt="logo" />
+</p>
+
+<h1 align="center">
+Easy Mail
+</h1>
 
 Easy mail is a service for sending emails in 
 your Golang application via Mailgun.
 
-## How to use?
+## How to use this project?
+### Configs
+First copy the example file:
+```shell
+cp ./config/config-example.yml ./config.yaml
+```
+
+Now set the configs, like mailgun Domain and API key.
+
+Run the server:
+```shell
+go run main.go
+```
+
 #### Email sending request
 | Syntax | Description     |
 |--------|-----------------|
@@ -35,14 +54,6 @@ your Golang application via Mailgun.
   "error": "[error]"
 }
 ```
-
-## Configs
-First copy the example file:
-```shell
-cp ./config/config-example.yml ./config.yaml
-```
-
-Now set the configs, like mailgun Domain and API key.
 
 ## Deploy
 To deploy the project on kubernetes, use the following commands:
