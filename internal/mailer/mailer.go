@@ -49,13 +49,11 @@ func (m *Mailer) Send(e Mail, validation bool, isHTML bool) (string, error) {
 func (m *Mailer) validate(sender string, receiver string) error {
 	v := mailgun.NewEmailValidator(m.APIKEY)
 
-	_, err := v.ValidateEmail(sender, false)
-	if err != nil {
+	if _, err := v.ValidateEmail(sender, false); err != nil {
 		return err
 	}
 
-	_, err = v.ValidateEmail(receiver, false)
-	if err != nil {
+	if _, err := v.ValidateEmail(receiver, false); err != nil {
 		return err
 	}
 

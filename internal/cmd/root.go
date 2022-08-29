@@ -10,15 +10,15 @@ import (
 func Execute() {
 	cfg := config.Load()
 
-	router := gin.Default()
-
-	m := mailer.New(cfg.MailGun)
+	app := gin.Default()
 
 	h := handler.Handler{
-		Mailer: m,
+		Mailer: mailer.New(cfg.MailGun),
 	}
 
-	router.POST("/mail/send", h.SendMail)
+	app.POST("/mail/send", h.SendMail)
 
-	_ = router.Run(cfg.Server)
+	if err := app.Run(cfg.Server); err != nil {
+		panic(err)
+	}
 }
