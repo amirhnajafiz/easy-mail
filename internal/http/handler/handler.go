@@ -32,7 +32,7 @@ func (h Handler) SendMail(c *gin.Context) {
 		_ = c.Error(err)
 	}
 
-	env := mailer.Envelope{
+	env := mailer.Mail{
 		From:    req.From,
 		Subject: req.Subject,
 		Text:    req.Text,

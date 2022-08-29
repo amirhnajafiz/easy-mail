@@ -9,7 +9,7 @@ type Mailer struct {
 	Client *mailgun.MailgunImpl
 }
 
-type Envelope struct {
+type Mail struct {
 	From    string
 	Subject string
 	Text    string
@@ -23,7 +23,7 @@ func New(cfg Config) Mailer {
 	}
 }
 
-func (m *Mailer) Send(e Envelope, validation bool, isHTML bool) (string, error) {
+func (m *Mailer) Send(e Mail, validation bool, isHTML bool) (string, error) {
 	if validation {
 		if err := m.validate(e.From, e.To); err != nil {
 			return "", err
